@@ -1,4 +1,5 @@
 # include <iostream>
+# include "ScalarConverter.hpp"
 
 int	main(int argc, char **argv)
 {
@@ -8,16 +9,9 @@ int	main(int argc, char **argv)
 					<< std::endl;
 		return (1);
 	}
+	ScalarConverter::convert(argv[1]);
 
-	char	cval;
-	int		ival;
-	float	fval;
-	double	dval;
 
-	std::cout	<< "char: "		<< cval << '\n';
-	std::cout	<< "int: "		<< ival << '\n';
-	std::cout	<< "float: "	<< fval << '\n';
-	std::cout	<< "double: "	<< dval << '\n';
 	return (0);
 }
 /*
