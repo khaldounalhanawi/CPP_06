@@ -31,12 +31,8 @@ ff
 -3.f4
 -3.0f4
 */
-
-void	char_case(const char &c)
-{
-	(void)c;
-	return ;
-}
+void	char_case(const char &c);
+void	float_case(long &lval);
 
 void	ScalarConverter::convert(const std::string &str)
 {
@@ -44,12 +40,31 @@ void	ScalarConverter::convert(const std::string &str)
 	char	*end;
 
 	end = nullptr;
+
+	// char case
 	if (str.size() == 1 && std::isalpha(str[0]))
 		return (char_case (str[0]));
 
-
+	// conver to double
 	lval = std::strtod (str.c_str(), &end);
 
+	// float case
+	if (*end == 'f' && *(end + 1) == 0)
+		return (float_case(lval));
+
+	// does it have a . in it >> double
+	//if ()
+
+
+	// else would be int 
+
+	// else naan no bla bla bal 
+	
+	// else unconvertable
+
+
+	// if (*end == 0)
+		// it s a number
 
 
 
@@ -58,3 +73,14 @@ void	ScalarConverter::convert(const std::string &str)
 	return ;
 }
 
+void	char_case(const char &c)
+{
+	(void)c;
+	return ;
+}
+
+void	float_case(long &lval)
+{
+	std::cout	<< "floaty" << static_cast<float>(lval) << std::endl;
+	return ;
+}
