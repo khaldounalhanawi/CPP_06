@@ -6,16 +6,14 @@
 /*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:26:30 by kalhanaw          #+#    #+#             */
-/*   Updated: 2026/04/30 16:36:32 by kalhanaw         ###   ########.fr       */
+/*   Updated: 2026/04/30 17:07:22 by kalhanaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <iostream>
 #include <cstdlib>
-// #include <cctype>
 #include <iomanip>
-#include <cmath>
 
 void	print_char(const char &c);
 void	print_number(double &doubleVal);
