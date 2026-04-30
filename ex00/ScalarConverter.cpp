@@ -2,85 +2,132 @@
 #include <iostream>
 #include <cstdlib>
 #include <cctype>
+#include <iomanip>
+#include <cmath>
 
-/*
-123123
--1231
-11872628736487236487623 (int max)
--11872628736487236487623 (int min)
-a23423
-sa324
-+-34
--3
-0000
-+0
--0
-.0234
-1.232
-a.1
-0.a
-""
-\n2
-\t
-f
-1.2f
-1f
-0f
-ff
--4f
--3.f4
--3.0f4
-*/
-void	char_case(const char &c);
-void	float_case(long &lval);
+void	print_char(const char &c);
+void	print_number(double &lval);
+bool	handle_literals(const std::string &str);
+bool	handle_double_edges(const double &doubleVal);
 
 void	ScalarConverter::convert(const std::string &str)
 {
-	long	lval;
+	double	doubleVal;
 	char	*end;
 
 	end = nullptr;
 
 	// char case
 	if (str.size() == 1 && std::isalpha(str[0]))
-		return (char_case (str[0]));
+		return (print_char (str[0]));
+
+	// literals case
+	if (handle_literals (str))
+		return ;
 
 	// conver to double
-	lval = std::strtod (str.c_str(), &end);
+	doubleVal = std::strtod (str.c_str(), &end);
+	if (handle_double_edges (doubleVal))
+		return ;
 
-	// float case
-	if (*end == 'f' && *(end + 1) == 0)
-		return (float_case(lval));
+	// numbers case
+	if ((*end == 'f' && *(end + 1) == 0)
+		|| *end == 0)
+		return (print_number(doubleVal));
 
-	// does it have a . in it >> double
-	//if ()
+	// else error
+	std::cout	<< "ERROR!" << std::endl;
+	return ;
+}
 
-
-	// else would be int 
-
-	// else naan no bla bla bal 
+bool	handle_double_edges(const double &doubleVal)
+{
+	const static std::string	inf[2] = {"-inf", "inf"};
 	
-	// else unconvertable
+	if (std::isnan(doubleVal))
+	{
+		std::cout	<< "char: impossible"
+					<< "\nint: impossible"
+					<< "\nfloat: nanf"
+					<< "\ndouble: nan"
+					<< std::endl;
+		return (true);
+	}
+	if (std::isinf(doubleVal))
+	{
+		std::cout	<< "char: impossible"
+					<< "\nint: impossible"
+					<< "\nfloat: "			<< inf[(doubleVal > 0)] << "f"
+					<< "\ndouble: "			<< inf[(doubleVal > 0)]
+					<< std::endl;
+		return (true);
+	}
+	return (false);
+}
 
+bool	handle_literals(const std::string &str)
+{
+	static const std::string	f_options[4] = {"-inff", "+inff", "inff", "nanf"};
+	static const std::string	d_options[4] = { "-inf", "+inf", "inf", "nan"};
 
-	// if (*end == 0)
-		// it s a number
+	for (int k = 0;k < 4; k++)
+	{
+		if (str == f_options[k] || str == d_options[k])
+		{
+			std::cout	<< "char: impossible"
+						<< "\nint: impossible"
+						<< "\nfloat: "		<< f_options[k]
+						<< "\ndouble: "		<< d_options[k]
+						<< std::endl;
+			return (true);
+		}
+	}
+	return (false);
+}
 
-
-
-	std::cout	<< "val is: "	<< lval
+void	print_char(const char &c)
+{
+	std::cout	<< "char: "									<< c
+				<< "\nint: "								<< static_cast<int>(c) 
+									<< std::fixed
+				<< "\nfloat: "		<< std::setprecision(1)	<< static_cast<float>(c)	<< "f"
+				<< "\ndouble: "		<< std::setprecision(1)	<< static_cast<double>(c)
 				<< std::endl;
 	return ;
 }
 
-void	char_case(const char &c)
+void	print_number(double &doubleVal)
 {
-	(void)c;
-	return ;
-}
+	if (doubleVal > std::numeric_limits<float>::max() || doubleVal < -std::numeric_limits<float>::max())
+	{
+		std::cout	<< "char: impossible"
+					<< "\nint: impossible"
+					<< "\nfloat: impossible";
+	}
+	else if (doubleVal > std::numeric_limits<int>::max() || doubleVal < -std::numeric_limits<int>::max())
+	{
+		std::cout	<< "char: impossible"
+					<< "\nint: impossible"
+					<< std::fixed
+					<< "\nfloat: "		<< std::setprecision(1)	<< static_cast<float>(doubleVal) << "f";
+	}
+	else if (static_cast<int>(doubleVal) <= 31 || static_cast<int>(doubleVal) > 126)
+	{
+		std::cout	<< "char: Non displayable"
+					<< "\nint: " << static_cast<int>(doubleVal)
+					<< std::fixed
+					<< "\nfloat: "		<< std::setprecision(1)	<< static_cast<float>(doubleVal) << "f";
+	}
+	else
+	{
+		std::cout	<< "char: " 							<< static_cast<char>(doubleVal)
+					<< "\nint: " 							<< static_cast<int>(doubleVal)
+					<< std::fixed
+					<< "\nfloat: " << std::setprecision(1)	<< static_cast<float>(doubleVal) << "f";
+	}
 
-void	float_case(long &lval)
-{
-	std::cout	<< "floaty" << static_cast<float>(lval) << std::endl;
+	std::cout	<< std::fixed
+				<< "\ndouble: "		<< std::setprecision(1)	<< static_cast<double>(doubleVal)
+				<< std::endl;
 	return ;
 }
