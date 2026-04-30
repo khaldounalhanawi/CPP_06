@@ -57,8 +57,9 @@ bool	handle_double_edges(const double &doubleVal)
 	{
 		std::cout	<< "char: impossible"
 					<< "\nint: impossible"
-					<< "\nfloat: "			<< inf[(doubleVal > 0)] << "f"
-					<< "\ndouble: "			<< inf[(doubleVal > 0)]
+					<< "\nfloat: "	<< inf[(doubleVal > 0)]
+									<< "f"
+					<< "\ndouble: "	<< inf[(doubleVal > 0)]
 					<< std::endl;
 		return (true);
 	}
@@ -76,8 +77,8 @@ bool	handle_literals(const std::string &str)
 		{
 			std::cout	<< "char: impossible"
 						<< "\nint: impossible"
-						<< "\nfloat: "		<< f_options[k]
-						<< "\ndouble: "		<< d_options[k]
+						<< "\nfloat: "	<< f_options[k]
+						<< "\ndouble: "	<< d_options[k]
 						<< std::endl;
 			return (true);
 		}
@@ -87,47 +88,57 @@ bool	handle_literals(const std::string &str)
 
 void	print_char(const char &c)
 {
-	std::cout	<< "char: "									<< c
-				<< "\nint: "								<< static_cast<int>(c) 
+	std::cout	<< "char: "			<< c
+				<< "\nint: "		<< static_cast<int>(c) 
 									<< std::fixed
-				<< "\nfloat: "		<< std::setprecision(1)	<< static_cast<float>(c)	<< "f"
-				<< "\ndouble: "		<< std::setprecision(1)	<< static_cast<double>(c)
+				<< "\nfloat: "		<< std::setprecision(1)
+									<< static_cast<float>(c)
+									<< "f"
+				<< "\ndouble: "		<< std::setprecision(1)
+									<< static_cast<double>(c)
 				<< std::endl;
 	return ;
 }
 
 void	print_number(double &doubleVal)
 {
-	if (doubleVal > std::numeric_limits<float>::max() || doubleVal < -std::numeric_limits<float>::max())
+	if (doubleVal > std::numeric_limits<float>::max()
+		|| doubleVal < -std::numeric_limits<float>::max())
 	{
 		std::cout	<< "char: impossible"
 					<< "\nint: impossible"
 					<< "\nfloat: impossible";
 	}
-	else if (doubleVal > std::numeric_limits<int>::max() || doubleVal < -std::numeric_limits<int>::max())
+	else if (doubleVal > std::numeric_limits<int>::max()
+			|| doubleVal < -std::numeric_limits<int>::max())
 	{
 		std::cout	<< "char: impossible"
 					<< "\nint: impossible"
-					<< std::fixed
-					<< "\nfloat: "		<< std::setprecision(1)	<< static_cast<float>(doubleVal) << "f";
+					<< "\nfloat: "	<< std::fixed
+									<< std::setprecision(1)
+									<< static_cast<float>(doubleVal) << "f";
 	}
-	else if (static_cast<int>(doubleVal) <= 31 || static_cast<int>(doubleVal) > 126)
+	else if (static_cast<int>(doubleVal) <= 31
+			|| static_cast<int>(doubleVal) > 126)
 	{
 		std::cout	<< "char: Non displayable"
-					<< "\nint: " << static_cast<int>(doubleVal)
-					<< std::fixed
-					<< "\nfloat: "		<< std::setprecision(1)	<< static_cast<float>(doubleVal) << "f";
+					<< "\nint: "	<< static_cast<int>(doubleVal)
+					<< "\nfloat: "	<< std::fixed
+									<< std::setprecision(1)
+									<< static_cast<float>(doubleVal) << "f";
 	}
 	else
 	{
-		std::cout	<< "char: " 							<< static_cast<char>(doubleVal)
-					<< "\nint: " 							<< static_cast<int>(doubleVal)
-					<< std::fixed
-					<< "\nfloat: " << std::setprecision(1)	<< static_cast<float>(doubleVal) << "f";
+		std::cout	<< "char: "		<< static_cast<char>(doubleVal)
+					<< "\nint: "	<< static_cast<int>(doubleVal)
+					<< "\nfloat: "	<< std::fixed
+									<< std::setprecision(1)
+									<< static_cast<float>(doubleVal) << "f";
 	}
 
-	std::cout	<< std::fixed
-				<< "\ndouble: "		<< std::setprecision(1)	<< static_cast<double>(doubleVal)
+	std::cout	<< "\ndouble: "	<< std::fixed
+								<< std::setprecision(1)
+								<< static_cast<double>(doubleVal)
 				<< std::endl;
 	return ;
 }
