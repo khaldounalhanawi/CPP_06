@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kalhanaw <kalhanaw@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/30 16:26:30 by kalhanaw          #+#    #+#             */
+/*   Updated: 2026/04/30 16:36:32 by kalhanaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScalarConverter.hpp"
 #include <iostream>
 #include <cstdlib>
-#include <cctype>
+// #include <cctype>
 #include <iomanip>
 #include <cmath>
 
 void	print_char(const char &c);
-void	print_number(double &lval);
+void	print_number(double &doubleVal);
 bool	handle_literals(const std::string &str);
 bool	handle_double_edges(const double &doubleVal);
 
@@ -118,8 +130,16 @@ void	print_number(double &doubleVal)
 									<< std::setprecision(1)
 									<< static_cast<float>(doubleVal) << "f";
 	}
-	else if (static_cast<int>(doubleVal) <= 31
-			|| static_cast<int>(doubleVal) > 126)
+	else if (static_cast<int>(doubleVal) < 0
+			|| static_cast<int>(doubleVal) > 127)
+	{
+		std::cout	<< "char: impossible"
+					<< "\nint: "	<< static_cast<int>(doubleVal)
+					<< "\nfloat: "	<< std::fixed
+									<< std::setprecision(1)
+									<< static_cast<float>(doubleVal) << "f";
+	}
+	else if (!std::isprint (static_cast<int>(doubleVal)))
 	{
 		std::cout	<< "char: Non displayable"
 					<< "\nint: "	<< static_cast<int>(doubleVal)
