@@ -1,10 +1,29 @@
 #include "Base.hpp"
 #include "ABC.hpp"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 Base	*generate(void)
 {
-	return (new B);
+	int	dice;
+	int	f1;
+	int	f2;
+
+	f1 = std::rand() % 2;
+	f2 = std::rand() % 2;
+
+	dice = f1 + f2;
+	switch (dice)
+	{
+		case (0):
+			return (new A);
+		case (1):
+			return (new B);
+		case (2):
+			return (new C);
+	};
+	return (NULL);
 }
 
 void	identify(Base* p)
@@ -39,26 +58,26 @@ void	identify(Base& p)
 	try
 	{
 		A &attempt1 = dynamic_cast<A&>(p);
-		std::cout<<	"Pointer is of type A" << std::endl;
-		(void)attempt1;
+		std::cout<<	"Type of the object referenced by p: A" << std::endl;
+		(void) attempt1;
 		return ;
 	}
 	catch (...){};
 
 	try
 	{
-		B &attempt2 =dynamic_cast<B&>(p);
-		std::cout<<	"Pointer is of type B" << std::endl;
-		(void)attempt2;
+		B &attempt2 = dynamic_cast<B&>(p);
+		std::cout<<	"Type of the object referenced by p: B" << std::endl;
+		(void) attempt2;
 		return ;
 	}
 	catch (...){};
 
 	try
 	{
-		C &attempt3 =dynamic_cast<C&>(p);
-		std::cout<<	"Pointer is of type C" << std::endl;
-		(void)attempt3;
+		C &attempt3 = dynamic_cast<C&>(p);
+		std::cout<<	"Type of the object referenced by p: C" << std::endl;
+		(void) attempt3;
 		return ;
 	}
 	catch (...){};
@@ -67,12 +86,15 @@ void	identify(Base& p)
 
 int	main()
 {
+	std::srand(std::time(0));
+
 	std::cout<<	"*** Random generation & Identifier tests ***" << std::endl;
 	
 	for (int i = 0 ; i < 5; i++)
 	{
 		Base *p = generate();
 		identify (p);
+		delete (p);
 	}
 
 	std::cout<<	"*** Referance Identifier tests ***" << std::endl;
