@@ -14,6 +14,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
+#include <cmath>
+#include <limits>
 
 void	print_char(const char &c);
 void	print_number(double &doubleVal);
@@ -25,7 +27,7 @@ void	ScalarConverter::convert(const std::string &str)
 	double	doubleVal;
 	char	*end;
 
-	end = nullptr;
+	end = NULL;
 
 	// char case
 	if (str.size() == 1 && std::isalpha(str[0]))
